@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalystx2-api-deployment
+  labels:
+    app: catalystx2-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalystx2-api
+  template:
+    metadata:
+      labels:
+        app: catalystx2-api
+    spec:
+      containers:
+      - name: catalystx2-api
+        image: 618020673772.dkr.ecr.us-west-2.amazonaws.com/catalystx2:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
