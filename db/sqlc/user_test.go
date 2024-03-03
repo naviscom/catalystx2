@@ -11,11 +11,9 @@ import (
 
 func createRandomUser(t *testing.T) User {
 	arg := CreateUserParams{
-		HashedPassword:    util.RandomName(8),
-		FullName:          util.RandomName(8),
-		Email:             util.RandomName(8),
-		PasswordChangedAt: time.Now().UTC(),
-		CreatedAt:         time.Now().UTC(),
+		HashedPassword: util.RandomName(8),
+		FullName:       util.RandomName(8),
+		Email:          util.RandomName(8),
 	}
 	user, err := testStore.CreateUser(context.Background(), arg)
 	require.NoError(t, err)
