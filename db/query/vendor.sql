@@ -1,8 +1,7 @@
 -- name: CreateVendor :one
 INSERT INTO vendors (
     vendor_name,
-    vendor_desc
-) VALUES (
+    vendor_desc) VALUES (
  $1, $2
 )
 RETURNING *;

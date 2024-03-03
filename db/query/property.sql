@@ -3,8 +3,7 @@ INSERT INTO properties (
     property_name,
     lat,
     long,
-    block_id
-) VALUES (
+    block_id) VALUES (
  $1, $2, $3, $4
 )
 RETURNING *;

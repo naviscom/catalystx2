@@ -4,8 +4,7 @@ INSERT INTO blocks (
     block_desc,
     total_population,
     town_id,
-    clutter_id
-) VALUES (
+    clutter_id) VALUES (
  $1, $2, $3, $4, $5
 )
 RETURNING *;

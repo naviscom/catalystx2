@@ -1,8 +1,7 @@
 -- name: CreateArea :one
 INSERT INTO areas (
     area_name,
-    area_desc
-) VALUES (
+    area_desc) VALUES (
  $1, $2
 )
 RETURNING *;

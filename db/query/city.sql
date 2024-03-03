@@ -2,8 +2,7 @@
 INSERT INTO cities (
     city_name,
     city_desc,
-    state_id
-) VALUES (
+    state_id) VALUES (
  $1, $2, $3
 )
 RETURNING *;

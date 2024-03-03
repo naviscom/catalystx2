@@ -1,8 +1,7 @@
 -- name: CreateClutter :one
 INSERT INTO clutters (
     clutter_name,
-    clutter_desc
-) VALUES (
+    clutter_desc) VALUES (
  $1, $2
 )
 RETURNING *;

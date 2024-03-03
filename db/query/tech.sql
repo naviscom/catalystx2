@@ -1,8 +1,7 @@
 -- name: CreateTech :one
 INSERT INTO techs (
     tech_name,
-    tech_desc
-) VALUES (
+    tech_desc) VALUES (
  $1, $2
 )
 RETURNING *;
