@@ -2,7 +2,7 @@
 INSERT INTO sitetypes (
     type_name,
     type_desc) VALUES (
- $1, $2
+ $1,$2
 )
 RETURNING *;
 

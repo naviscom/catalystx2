@@ -2,7 +2,7 @@
 INSERT INTO clutters (
     clutter_name,
     clutter_desc) VALUES (
- $1, $2
+ $1,$2
 )
 RETURNING *;
 

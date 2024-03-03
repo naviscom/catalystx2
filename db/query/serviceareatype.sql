@@ -2,7 +2,7 @@
 INSERT INTO serviceareatypes (
     serviceareatype_name,
     serviceareatype_desc) VALUES (
- $1, $2
+ $1,$2
 )
 RETURNING *;
 

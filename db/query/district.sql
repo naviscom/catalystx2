@@ -3,7 +3,7 @@ INSERT INTO districts (
     district_name,
     district_desc,
     city_id) VALUES (
- $1, $2, $3
+ $1,$2,$3
 )
 RETURNING *;
 

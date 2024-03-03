@@ -4,7 +4,7 @@ INSERT INTO states (
     state_desc,
     country_id,
     area_id) VALUES (
- $1, $2, $3, $4
+ $1,$2,$3,$4
 )
 RETURNING *;
 

@@ -3,7 +3,7 @@ INSERT INTO countries (
     country_name,
     country_desc,
     continent_id) VALUES (
- $1, $2, $3
+ $1,$2,$3
 )
 RETURNING *;
 

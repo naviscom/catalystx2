@@ -2,7 +2,7 @@
 INSERT INTO areas (
     area_name,
     area_desc) VALUES (
- $1, $2
+ $1,$2
 )
 RETURNING *;
 

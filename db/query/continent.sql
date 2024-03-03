@@ -2,7 +2,7 @@
 INSERT INTO continents (
     continent_name,
     continent_desc) VALUES (
- $1, $2
+ $1,$2
 )
 RETURNING *;
 
