@@ -86,7 +86,6 @@ func TestUpdateUser(t *testing.T) {
 		FullName:          util.RandomName(8),
 		Email:             util.RandomName(8),
 		PasswordChangedAt: time.Now().UTC(),
-		PasswordCreatedAt: time.Now().UTC(),
 	}
 	user2, err := testStore.UpdateUser(context.Background(), arg)
 	require.NoError(t, err)
