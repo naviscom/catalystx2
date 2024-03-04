@@ -87,9 +87,7 @@ cedlcapacity = $32,
 cedlutilization = $33,
 iubcapacity = $34,
 iubutlization = $35,
-bhrrcusers = $36,
-cell_id = $37
-WHERE id = $1
+bhrrcusers = $36cell_id = $37WHERE id = $1
 RETURNING *;
 
 -- name: DeleteTraffic :exec

@@ -29,9 +29,7 @@ UPDATE blocks
 SET block_name = $2,
 block_desc = $3,
 total_population = $4,
-town_id = $5,
-clutter_id = $6
-WHERE id = $1
+town_id = $5clutter_id = $6WHERE id = $1
 RETURNING *;
 
 -- name: DeleteBlock :exec

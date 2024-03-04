@@ -22,9 +22,7 @@ OFFSET $2;
 
 -- name: UpdateArea :one
 UPDATE areas
-SET area_name = $2,
-area_desc = $3
-WHERE id = $1
+SET area_name = $2area_desc = $3WHERE id = $1
 RETURNING *;
 
 -- name: DeleteArea :exec

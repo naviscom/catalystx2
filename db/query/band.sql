@@ -31,9 +31,7 @@ SET band_name = $2,
 band_desc = $3,
 size = $4,
 start_freq = $5,
-end_freq = $6,
-tech_id = $7
-WHERE id = $1
+end_freq = $6tech_id = $7WHERE id = $1
 RETURNING *;
 
 -- name: DeleteBand :exec

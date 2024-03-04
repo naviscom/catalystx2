@@ -31,9 +31,7 @@ SET carrier_name = $2,
 carrier_desc = $3,
 size = $4,
 start_freq = $5,
-end_freq = $6,
-band_id = $7
-WHERE id = $1
+end_freq = $6band_id = $7WHERE id = $1
 RETURNING *;
 
 -- name: DeleteCarrier :exec

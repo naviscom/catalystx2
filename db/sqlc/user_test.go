@@ -24,7 +24,7 @@ func createRandomUser(t *testing.T) User {
 	require.Equal(t, arg.FullName, user.FullName)
 	require.Equal(t, arg.Email, user.Email)
 	require.True(t, user.PasswordChangedAt.IsZero())
-	require.NotZero(t, user.CreatedAt)
+	require.NotZero(t, user.PasswordCreatedAt)
 	return user
 }
 
@@ -43,7 +43,7 @@ func TestGetUser0(t *testing.T) {
 	require.Equal(t, user1.FullName, user2.FullName)
 	require.Equal(t, user1.Email, user2.Email)
 	require.WithinDuration(t, user1.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
-	require.WithinDuration(t, user1.CreatedAt, user2.CreatedAt, time.Second)
+	require.WithinDuration(t, user1.PasswordCreatedAt, user2.PasswordCreatedAt, time.Second)
 }
 
 func TestGetUser3(t *testing.T) {
@@ -57,7 +57,7 @@ func TestGetUser3(t *testing.T) {
 	require.Equal(t, user1.FullName, user2.FullName)
 	require.Equal(t, user1.Email, user2.Email)
 	require.WithinDuration(t, user1.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
-	require.WithinDuration(t, user1.CreatedAt, user2.CreatedAt, time.Second)
+	require.WithinDuration(t, user1.PasswordCreatedAt, user2.PasswordCreatedAt, time.Second)
 }
 
 func TestListUsers(t *testing.T) {
@@ -81,12 +81,12 @@ func TestListUsers(t *testing.T) {
 func TestUpdateUser(t *testing.T) {
 	user1 := createRandomUser(t)
 	arg := UpdateUserParams{
-		Username:          util.RandomName(8),
+		Username:          user1.Username,
 		HashedPassword:    util.RandomName(8),
 		FullName:          util.RandomName(8),
 		Email:             util.RandomName(8),
 		PasswordChangedAt: time.Now().UTC(),
-		CreatedAt:         time.Now().UTC(),
+		PasswordCreatedAt: time.Now().UTC(),
 	}
 	user2, err := testStore.UpdateUser(context.Background(), arg)
 	require.NoError(t, err)
@@ -97,7 +97,7 @@ func TestUpdateUser(t *testing.T) {
 	require.Equal(t, arg.FullName, user2.FullName)
 	require.Equal(t, arg.Email, user2.Email)
 	require.WithinDuration(t, arg.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
-	require.WithinDuration(t, arg.CreatedAt, user2.CreatedAt, time.Second)
+	require.WithinDuration(t, arg.PasswordCreatedAt, user2.PasswordCreatedAt, time.Second)
 
 }
 

@@ -27,9 +27,7 @@ OFFSET $2;
 UPDATE states
 SET state_name = $2,
 state_desc = $3,
-country_id = $4,
-area_id = $5
-WHERE id = $1
+country_id = $4area_id = $5WHERE id = $1
 RETURNING *;
 
 -- name: DeleteState :exec

@@ -25,9 +25,7 @@ OFFSET $2;
 -- name: UpdateTown :one
 UPDATE towns
 SET town_name = $2,
-town_desc = $3,
-district_id = $4
-WHERE id = $1
+town_desc = $3district_id = $4WHERE id = $1
 RETURNING *;
 
 -- name: DeleteTown :exec
