@@ -54,6 +54,7 @@ OFFSET $2;
 -- name: UpdateTraffic :one
 UPDATE traffic
 SET traffic_date = $2,
+traffic_date = $2,
 avgdailydldatamb = $3,
 avgdailyuldatamb = $4,
 avgdailytotdatamb = $5,
@@ -87,7 +88,9 @@ cedlcapacity = $32,
 cedlutilization = $33,
 iubcapacity = $34,
 iubutlization = $35,
-bhrrcusers = $36cell_id = $37WHERE id = $1
+bhrrcusers = $36,
+cell_id = $37
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteTraffic :exec

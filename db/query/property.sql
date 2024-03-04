@@ -26,8 +26,11 @@ OFFSET $2;
 -- name: UpdateProperty :one
 UPDATE properties
 SET property_name = $2,
+property_name = $2,
 lat = $3,
-long = $4block_id = $5WHERE id = $1
+long = $4,
+block_id = $5
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteProperty :exec

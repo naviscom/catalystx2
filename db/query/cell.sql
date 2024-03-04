@@ -40,6 +40,7 @@ OFFSET $2;
 -- name: UpdateCell :one
 UPDATE cells
 SET cell_name = $2,
+cell_name = $2,
 cell_name_old = $3,
 cell_id_givin = $4,
 cell_id_givin_old = $5,
@@ -55,7 +56,9 @@ antennatype = $14,
 antennamodel = $15,
 ecgi = $16,
 site_id = $17,
-carrier_id = $18serviceareatype_id = $19WHERE id = $1
+carrier_id = $18,
+serviceareatype_id = $19
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteCell :exec

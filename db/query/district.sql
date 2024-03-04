@@ -25,7 +25,10 @@ OFFSET $2;
 -- name: UpdateDistrict :one
 UPDATE districts
 SET district_name = $2,
-district_desc = $3city_id = $4WHERE id = $1
+district_name = $2,
+district_desc = $3,
+city_id = $4
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteDistrict :exec

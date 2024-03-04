@@ -22,7 +22,10 @@ OFFSET $2;
 
 -- name: UpdateClutter :one
 UPDATE clutters
-SET clutter_name = $2clutter_desc = $3WHERE id = $1
+SET clutter_name = $2,
+clutter_name = $2,
+clutter_desc = $3
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteClutter :exec

@@ -22,7 +22,10 @@ OFFSET $2;
 
 -- name: UpdateTech :one
 UPDATE techs
-SET tech_name = $2tech_desc = $3WHERE id = $1
+SET tech_name = $2,
+tech_name = $2,
+tech_desc = $3
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteTech :exec

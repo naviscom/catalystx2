@@ -22,7 +22,10 @@ OFFSET $2;
 
 -- name: UpdateSitetype :one
 UPDATE sitetypes
-SET type_name = $2type_desc = $3WHERE id = $1
+SET type_name = $2,
+type_name = $2,
+type_desc = $3
+WHERE id = $1
 RETURNING *;
 
 -- name: DeleteSitetype :exec
