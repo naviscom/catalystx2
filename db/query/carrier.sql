@@ -28,7 +28,6 @@ OFFSET $2;
 -- name: UpdateCarrier :one
 UPDATE carriers
 SET carrier_name = $2,
-carrier_name = $2,
 carrier_desc = $3,
 size = $4,
 start_freq = $5,

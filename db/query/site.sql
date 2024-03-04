@@ -33,7 +33,6 @@ OFFSET $2;
 -- name: UpdateSite :one
 UPDATE sites
 SET site_name = $2,
-site_name = $2,
 site_name_old = $3,
 site_id_givin = $4,
 site_id_givin_old = $5,

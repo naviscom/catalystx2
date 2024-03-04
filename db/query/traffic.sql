@@ -54,7 +54,6 @@ OFFSET $2;
 -- name: UpdateTraffic :one
 UPDATE traffic
 SET traffic_date = $2,
-traffic_date = $2,
 avgdailydldatamb = $3,
 avgdailyuldatamb = $4,
 avgdailytotdatamb = $5,

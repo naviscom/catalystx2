@@ -23,7 +23,6 @@ OFFSET $2;
 -- name: UpdateArea :one
 UPDATE areas
 SET area_name = $2,
-area_name = $2,
 area_desc = $3
 WHERE id = $1
 RETURNING *;

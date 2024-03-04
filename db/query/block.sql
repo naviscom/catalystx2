@@ -27,7 +27,6 @@ OFFSET $2;
 -- name: UpdateBlock :one
 UPDATE blocks
 SET block_name = $2,
-block_name = $2,
 block_desc = $3,
 total_population = $4,
 town_id = $5,

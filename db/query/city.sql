@@ -25,7 +25,6 @@ OFFSET $2;
 -- name: UpdateCity :one
 UPDATE cities
 SET city_name = $2,
-city_name = $2,
 city_desc = $3,
 state_id = $4
 WHERE id = $1

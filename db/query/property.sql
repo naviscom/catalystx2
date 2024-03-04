@@ -26,7 +26,6 @@ OFFSET $2;
 -- name: UpdateProperty :one
 UPDATE properties
 SET property_name = $2,
-property_name = $2,
 lat = $3,
 long = $4,
 block_id = $5

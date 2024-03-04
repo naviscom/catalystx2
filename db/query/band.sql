@@ -28,7 +28,6 @@ OFFSET $2;
 -- name: UpdateBand :one
 UPDATE bands
 SET band_name = $2,
-band_name = $2,
 band_desc = $3,
 size = $4,
 start_freq = $5,

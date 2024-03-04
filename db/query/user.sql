@@ -25,7 +25,6 @@ OFFSET $2;
 -- name: UpdateUser :one
 UPDATE users
 SET hashed_password = $2,
-hashed_password = $2,
 full_name = $3,
 email = $4,
 password_changed_at = $5,

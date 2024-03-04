@@ -40,7 +40,6 @@ OFFSET $2;
 -- name: UpdateCell :one
 UPDATE cells
 SET cell_name = $2,
-cell_name = $2,
 cell_name_old = $3,
 cell_id_givin = $4,
 cell_id_givin_old = $5,

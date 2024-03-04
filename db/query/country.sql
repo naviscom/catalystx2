@@ -25,7 +25,6 @@ OFFSET $2;
 -- name: UpdateCountry :one
 UPDATE countries
 SET country_name = $2,
-country_name = $2,
 country_desc = $3,
 continent_id = $4
 WHERE id = $1
