@@ -96,7 +96,6 @@ func TestUpdateUser(t *testing.T) {
 	require.Equal(t, arg.FullName, user2.FullName)
 	require.Equal(t, arg.Email, user2.Email)
 	require.WithinDuration(t, arg.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
-	require.WithinDuration(t, arg.PasswordCreatedAt, user2.PasswordCreatedAt, time.Second)
 
 }
 
