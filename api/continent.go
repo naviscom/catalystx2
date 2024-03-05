@@ -131,7 +131,7 @@ func (server *Server) deleteContinent(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteContinent(ctx, req.ID)
+	err := server.store.DeleteContinent(ctx, req.ContinentDesc)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

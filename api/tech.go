@@ -131,7 +131,7 @@ func (server *Server) deleteTech(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteTech(ctx, req.ID)
+	err := server.store.DeleteTech(ctx, req.TechDesc)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

@@ -143,7 +143,7 @@ func (server *Server) deleteBlock(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteBlock(ctx, req.ID)
+	err := server.store.DeleteBlock(ctx, req.ClutterID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

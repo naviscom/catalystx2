@@ -131,7 +131,7 @@ func (server *Server) deleteServiceareatype(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteServiceareatype(ctx, req.ID)
+	err := server.store.DeleteServiceareatype(ctx, req.ServiceareatypeDesc)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

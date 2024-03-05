@@ -139,7 +139,7 @@ func (server *Server) deleteState(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteState(ctx, req.ID)
+	err := server.store.DeleteState(ctx, req.AreaID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

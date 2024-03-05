@@ -135,7 +135,7 @@ func (server *Server) deleteTown(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteTown(ctx, req.ID)
+	err := server.store.DeleteTown(ctx, req.DistrictID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

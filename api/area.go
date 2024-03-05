@@ -131,7 +131,7 @@ func (server *Server) deleteArea(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteArea(ctx, req.ID)
+	err := server.store.DeleteArea(ctx, req.AreaDesc)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

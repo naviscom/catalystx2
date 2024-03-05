@@ -139,7 +139,7 @@ func (server *Server) deleteProperty(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteProperty(ctx, req.ID)
+	err := server.store.DeleteProperty(ctx, req.BlockID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

@@ -168,7 +168,7 @@ func (server *Server) deleteSite(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteSite(ctx, req.ID)
+	err := server.store.DeleteSite(ctx, req.VendorID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

@@ -195,7 +195,7 @@ func (server *Server) deleteCell(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteCell(ctx, req.ID)
+	err := server.store.DeleteCell(ctx, req.ServiceareatypeID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

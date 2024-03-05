@@ -131,7 +131,7 @@ func (server *Server) deleteVendor(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteVendor(ctx, req.ID)
+	err := server.store.DeleteVendor(ctx, req.VendorDesc)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

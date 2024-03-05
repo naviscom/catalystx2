@@ -147,7 +147,7 @@ func (server *Server) deleteCarrier(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteCarrier(ctx, req.ID)
+	err := server.store.DeleteCarrier(ctx, req.BandID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

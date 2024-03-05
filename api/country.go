@@ -135,7 +135,7 @@ func (server *Server) deleteCountry(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteCountry(ctx, req.ID)
+	err := server.store.DeleteCountry(ctx, req.ContinentID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

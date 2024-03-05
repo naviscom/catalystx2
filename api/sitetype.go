@@ -131,7 +131,7 @@ func (server *Server) deleteSitetype(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteSitetype(ctx, req.ID)
+	err := server.store.DeleteSitetype(ctx, req.TypeDesc)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

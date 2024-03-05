@@ -147,7 +147,7 @@ func (server *Server) deleteBand(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteBand(ctx, req.ID)
+	err := server.store.DeleteBand(ctx, req.TechID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

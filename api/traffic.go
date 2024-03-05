@@ -249,7 +249,7 @@ func (server *Server) deleteTraffic(ctx *gin.Context) {
 		return
 	}
 
-	err := server.store.DeleteTraffic(ctx, req.ID)
+	err := server.store.DeleteTraffic(ctx, req.CellID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
