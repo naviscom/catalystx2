@@ -2,14 +2,14 @@ package api
 
 import (
 	"net/http"
-
+	"time"
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createClutterRequest struct {
-	ClutterName string `json:"clutter_name" binding:"required"`
-	ClutterDesc string `json:"clutter_desc" binding:"required"`
+	ClutterName	string	`json:"clutter_name" binding:"required"`
+	ClutterDesc	string	`json:"clutter_desc" binding:"required"`
 }
 
 func (server *Server) createClutter(ctx *gin.Context) {
@@ -20,8 +20,8 @@ func (server *Server) createClutter(ctx *gin.Context) {
 	}
 
 	arg := db.CreateClutterParams{
-		ClutterName: req.ClutterName,
-		ClutterDesc: req.ClutterDesc,
+		ClutterName:	req.ClutterName,
+		ClutterDesc:	req.ClutterDesc,
 	}
 	clutter, err := server.store.CreateClutter(ctx, arg)
 	if err != nil {
@@ -32,7 +32,7 @@ func (server *Server) createClutter(ctx *gin.Context) {
 }
 
 type getClutterRequest0 struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getClutter0(ctx *gin.Context) {
@@ -51,7 +51,7 @@ func (server *Server) getClutter0(ctx *gin.Context) {
 }
 
 type getClutterRequest1 struct {
-	ClutterName string `uri:"clutter_name" binding:"required,min=1"`
+	ClutterName	string	`uri:"clutter_name" binding:"required,min=1"`
 }
 
 func (server *Server) getClutter1(ctx *gin.Context) {
@@ -71,7 +71,7 @@ func (server *Server) getClutter1(ctx *gin.Context) {
 
 type listClutterRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listClutters(ctx *gin.Context) {
@@ -95,9 +95,9 @@ func (server *Server) listClutters(ctx *gin.Context) {
 }
 
 type updateClutterRequest struct {
-	ID          int64  `json:"id" binding:"required"`
-	ClutterName string `json:"clutter_name" binding:"required"`
-	ClutterDesc string `json:"clutter_desc" binding:"required"`
+	ID	int64	`json:"id" binding:"required"`
+	ClutterName	string	`json:"clutter_name" binding:"required"`
+	ClutterDesc	string	`json:"clutter_desc" binding:"required"`
 }
 
 func (server *Server) updateClutter(ctx *gin.Context) {
@@ -108,9 +108,9 @@ func (server *Server) updateClutter(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateClutterParams{
-		ID:          req.ID,
-		ClutterName: req.ClutterName,
-		ClutterDesc: req.ClutterDesc,
+		ID:	req.ID,
+		ClutterName:	req.ClutterName,
+		ClutterDesc:	req.ClutterDesc,
 	}
 	clutter, err := server.store.UpdateClutter(ctx, arg)
 	if err != nil {
@@ -121,20 +121,21 @@ func (server *Server) updateClutter(ctx *gin.Context) {
 }
 
 type deleteClutterRequest struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteClutter(ctx *gin.Context) {
-	var req deleteClutterRequest
-	if err := ctx.ShouldBindUri(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return
-	}
+		var req deleteClutterRequest
+		if err := ctx.ShouldBindUri(&req); err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
 
-	err := server.store.DeleteClutter(ctx, req.ClutterDesc)
+		err := server.store.DeleteClutter(ctx, req.)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
+

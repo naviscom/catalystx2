@@ -2,14 +2,14 @@ package api
 
 import (
 	"net/http"
-
+	"time"
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createContinentRequest struct {
-	ContinentName string `json:"continent_name" binding:"required"`
-	ContinentDesc string `json:"continent_desc" binding:"required"`
+	ContinentName	string	`json:"continent_name" binding:"required"`
+	ContinentDesc	string	`json:"continent_desc" binding:"required"`
 }
 
 func (server *Server) createContinent(ctx *gin.Context) {
@@ -20,8 +20,8 @@ func (server *Server) createContinent(ctx *gin.Context) {
 	}
 
 	arg := db.CreateContinentParams{
-		ContinentName: req.ContinentName,
-		ContinentDesc: req.ContinentDesc,
+		ContinentName:	req.ContinentName,
+		ContinentDesc:	req.ContinentDesc,
 	}
 	continent, err := server.store.CreateContinent(ctx, arg)
 	if err != nil {
@@ -32,7 +32,7 @@ func (server *Server) createContinent(ctx *gin.Context) {
 }
 
 type getContinentRequest0 struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getContinent0(ctx *gin.Context) {
@@ -51,7 +51,7 @@ func (server *Server) getContinent0(ctx *gin.Context) {
 }
 
 type getContinentRequest1 struct {
-	ContinentName string `uri:"continent_name" binding:"required,min=1"`
+	ContinentName	string	`uri:"continent_name" binding:"required,min=1"`
 }
 
 func (server *Server) getContinent1(ctx *gin.Context) {
@@ -71,7 +71,7 @@ func (server *Server) getContinent1(ctx *gin.Context) {
 
 type listContinentRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listContinents(ctx *gin.Context) {
@@ -95,9 +95,9 @@ func (server *Server) listContinents(ctx *gin.Context) {
 }
 
 type updateContinentRequest struct {
-	ID            int64  `json:"id" binding:"required"`
-	ContinentName string `json:"continent_name" binding:"required"`
-	ContinentDesc string `json:"continent_desc" binding:"required"`
+	ID	int64	`json:"id" binding:"required"`
+	ContinentName	string	`json:"continent_name" binding:"required"`
+	ContinentDesc	string	`json:"continent_desc" binding:"required"`
 }
 
 func (server *Server) updateContinent(ctx *gin.Context) {
@@ -108,9 +108,9 @@ func (server *Server) updateContinent(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateContinentParams{
-		ID:            req.ID,
-		ContinentName: req.ContinentName,
-		ContinentDesc: req.ContinentDesc,
+		ID:	req.ID,
+		ContinentName:	req.ContinentName,
+		ContinentDesc:	req.ContinentDesc,
 	}
 	continent, err := server.store.UpdateContinent(ctx, arg)
 	if err != nil {
@@ -121,20 +121,21 @@ func (server *Server) updateContinent(ctx *gin.Context) {
 }
 
 type deleteContinentRequest struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteContinent(ctx *gin.Context) {
-	var req deleteContinentRequest
-	if err := ctx.ShouldBindUri(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return
-	}
+		var req deleteContinentRequest
+		if err := ctx.ShouldBindUri(&req); err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
 
-	err := server.store.DeleteContinent(ctx, req.ContinentDesc)
+		err := server.store.DeleteContinent(ctx, req.)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
+

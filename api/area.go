@@ -2,14 +2,14 @@ package api
 
 import (
 	"net/http"
-
+	"time"
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createAreaRequest struct {
-	AreaName string `json:"area_name" binding:"required"`
-	AreaDesc string `json:"area_desc" binding:"required"`
+	AreaName	string	`json:"area_name" binding:"required"`
+	AreaDesc	string	`json:"area_desc" binding:"required"`
 }
 
 func (server *Server) createArea(ctx *gin.Context) {
@@ -20,8 +20,8 @@ func (server *Server) createArea(ctx *gin.Context) {
 	}
 
 	arg := db.CreateAreaParams{
-		AreaName: req.AreaName,
-		AreaDesc: req.AreaDesc,
+		AreaName:	req.AreaName,
+		AreaDesc:	req.AreaDesc,
 	}
 	area, err := server.store.CreateArea(ctx, arg)
 	if err != nil {
@@ -32,7 +32,7 @@ func (server *Server) createArea(ctx *gin.Context) {
 }
 
 type getAreaRequest0 struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getArea0(ctx *gin.Context) {
@@ -51,7 +51,7 @@ func (server *Server) getArea0(ctx *gin.Context) {
 }
 
 type getAreaRequest1 struct {
-	AreaName string `uri:"area_name" binding:"required,min=1"`
+	AreaName	string	`uri:"area_name" binding:"required,min=1"`
 }
 
 func (server *Server) getArea1(ctx *gin.Context) {
@@ -71,7 +71,7 @@ func (server *Server) getArea1(ctx *gin.Context) {
 
 type listAreaRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listAreas(ctx *gin.Context) {
@@ -95,9 +95,9 @@ func (server *Server) listAreas(ctx *gin.Context) {
 }
 
 type updateAreaRequest struct {
-	ID       int64  `json:"id" binding:"required"`
-	AreaName string `json:"area_name" binding:"required"`
-	AreaDesc string `json:"area_desc" binding:"required"`
+	ID	int64	`json:"id" binding:"required"`
+	AreaName	string	`json:"area_name" binding:"required"`
+	AreaDesc	string	`json:"area_desc" binding:"required"`
 }
 
 func (server *Server) updateArea(ctx *gin.Context) {
@@ -108,9 +108,9 @@ func (server *Server) updateArea(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateAreaParams{
-		ID:       req.ID,
-		AreaName: req.AreaName,
-		AreaDesc: req.AreaDesc,
+		ID:	req.ID,
+		AreaName:	req.AreaName,
+		AreaDesc:	req.AreaDesc,
 	}
 	area, err := server.store.UpdateArea(ctx, arg)
 	if err != nil {
@@ -121,20 +121,21 @@ func (server *Server) updateArea(ctx *gin.Context) {
 }
 
 type deleteAreaRequest struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteArea(ctx *gin.Context) {
-	var req deleteAreaRequest
-	if err := ctx.ShouldBindUri(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return
-	}
+		var req deleteAreaRequest
+		if err := ctx.ShouldBindUri(&req); err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
 
-	err := server.store.DeleteArea(ctx, req.AreaDesc)
+		err := server.store.DeleteArea(ctx, req.)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
+

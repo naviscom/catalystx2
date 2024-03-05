@@ -2,17 +2,17 @@ package api
 
 import (
 	"net/http"
-
+	"time"
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createBlockRequest struct {
-	BlockName       string `json:"block_name" binding:"required"`
-	BlockDesc       string `json:"block_desc" binding:"required"`
-	TotalPopulation int64  `json:"total_population" binding:"required"`
-	TownID          int64  `json:"town_id" binding:"required"`
-	ClutterID       int64  `json:"clutter_id" binding:"required"`
+	BlockName	string	`json:"block_name" binding:"required"`
+	BlockDesc	string	`json:"block_desc" binding:"required"`
+	TotalPopulation	int64	`json:"total_population" binding:"required"`
+	TownID	int64	`json:"town_id" binding:"required"`
+	ClutterID	int64	`json:"clutter_id" binding:"required"`
 }
 
 func (server *Server) createBlock(ctx *gin.Context) {
@@ -23,11 +23,11 @@ func (server *Server) createBlock(ctx *gin.Context) {
 	}
 
 	arg := db.CreateBlockParams{
-		BlockName:       req.BlockName,
-		BlockDesc:       req.BlockDesc,
-		TotalPopulation: req.TotalPopulation,
-		TownID:          req.TownID,
-		ClutterID:       req.ClutterID,
+		BlockName:	req.BlockName,
+		BlockDesc:	req.BlockDesc,
+		TotalPopulation:	req.TotalPopulation,
+		TownID:	req.TownID,
+		ClutterID:	req.ClutterID,
 	}
 	block, err := server.store.CreateBlock(ctx, arg)
 	if err != nil {
@@ -38,7 +38,7 @@ func (server *Server) createBlock(ctx *gin.Context) {
 }
 
 type getBlockRequest0 struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getBlock0(ctx *gin.Context) {
@@ -57,7 +57,7 @@ func (server *Server) getBlock0(ctx *gin.Context) {
 }
 
 type getBlockRequest1 struct {
-	BlockName string `uri:"block_name" binding:"required,min=1"`
+	BlockName	string	`uri:"block_name" binding:"required,min=1"`
 }
 
 func (server *Server) getBlock1(ctx *gin.Context) {
@@ -77,7 +77,7 @@ func (server *Server) getBlock1(ctx *gin.Context) {
 
 type listBlockRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listBlocks(ctx *gin.Context) {
@@ -101,12 +101,12 @@ func (server *Server) listBlocks(ctx *gin.Context) {
 }
 
 type updateBlockRequest struct {
-	ID              int64  `json:"id" binding:"required"`
-	BlockName       string `json:"block_name" binding:"required"`
-	BlockDesc       string `json:"block_desc" binding:"required"`
-	TotalPopulation int64  `json:"total_population" binding:"required"`
-	TownID          int64  `json:"town_id" binding:"required"`
-	ClutterID       int64  `json:"clutter_id" binding:"required"`
+	ID	int64	`json:"id" binding:"required"`
+	BlockName	string	`json:"block_name" binding:"required"`
+	BlockDesc	string	`json:"block_desc" binding:"required"`
+	TotalPopulation	int64	`json:"total_population" binding:"required"`
+	TownID	int64	`json:"town_id" binding:"required"`
+	ClutterID	int64	`json:"clutter_id" binding:"required"`
 }
 
 func (server *Server) updateBlock(ctx *gin.Context) {
@@ -117,12 +117,12 @@ func (server *Server) updateBlock(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateBlockParams{
-		ID:              req.ID,
-		BlockName:       req.BlockName,
-		BlockDesc:       req.BlockDesc,
-		TotalPopulation: req.TotalPopulation,
-		TownID:          req.TownID,
-		ClutterID:       req.ClutterID,
+		ID:	req.ID,
+		BlockName:	req.BlockName,
+		BlockDesc:	req.BlockDesc,
+		TotalPopulation:	req.TotalPopulation,
+		TownID:	req.TownID,
+		ClutterID:	req.ClutterID,
 	}
 	block, err := server.store.UpdateBlock(ctx, arg)
 	if err != nil {
@@ -133,20 +133,21 @@ func (server *Server) updateBlock(ctx *gin.Context) {
 }
 
 type deleteBlockRequest struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteBlock(ctx *gin.Context) {
-	var req deleteBlockRequest
-	if err := ctx.ShouldBindUri(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return
-	}
+		var req deleteBlockRequest
+		if err := ctx.ShouldBindUri(&req); err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
 
-	err := server.store.DeleteBlock(ctx, req.ClutterID)
+		err := server.store.DeleteBlock(ctx, req.)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
+

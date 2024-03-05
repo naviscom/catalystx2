@@ -2,16 +2,16 @@ package api
 
 import (
 	"net/http"
-
+	"time"
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createPropertyRequest struct {
-	PropertyName string  `json:"property_name" binding:"required"`
-	Lat          float32 `json:"lat" binding:"required"`
-	Long         float32 `json:"long" binding:"required"`
-	BlockID      int64   `json:"block_id" binding:"required"`
+	PropertyName	string	`json:"property_name" binding:"required"`
+	Lat	float32	`json:"lat" binding:"required"`
+	Long	float32	`json:"long" binding:"required"`
+	BlockID	int64	`json:"block_id" binding:"required"`
 }
 
 func (server *Server) createProperty(ctx *gin.Context) {
@@ -22,10 +22,10 @@ func (server *Server) createProperty(ctx *gin.Context) {
 	}
 
 	arg := db.CreatePropertyParams{
-		PropertyName: req.PropertyName,
-		Lat:          req.Lat,
-		Long:         req.Long,
-		BlockID:      req.BlockID,
+		PropertyName:	req.PropertyName,
+		Lat:	req.Lat,
+		Long:	req.Long,
+		BlockID:	req.BlockID,
 	}
 	property, err := server.store.CreateProperty(ctx, arg)
 	if err != nil {
@@ -36,7 +36,7 @@ func (server *Server) createProperty(ctx *gin.Context) {
 }
 
 type getPropertyRequest0 struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getProperty0(ctx *gin.Context) {
@@ -55,7 +55,7 @@ func (server *Server) getProperty0(ctx *gin.Context) {
 }
 
 type getPropertyRequest1 struct {
-	PropertyName string `uri:"property_name" binding:"required,min=1"`
+	PropertyName	string	`uri:"property_name" binding:"required,min=1"`
 }
 
 func (server *Server) getProperty1(ctx *gin.Context) {
@@ -75,7 +75,7 @@ func (server *Server) getProperty1(ctx *gin.Context) {
 
 type listPropertyRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listProperties(ctx *gin.Context) {
@@ -99,11 +99,11 @@ func (server *Server) listProperties(ctx *gin.Context) {
 }
 
 type updatePropertyRequest struct {
-	ID           int64   `json:"id" binding:"required"`
-	PropertyName string  `json:"property_name" binding:"required"`
-	Lat          float32 `json:"lat" binding:"required"`
-	Long         float32 `json:"long" binding:"required"`
-	BlockID      int64   `json:"block_id" binding:"required"`
+	ID	int64	`json:"id" binding:"required"`
+	PropertyName	string	`json:"property_name" binding:"required"`
+	Lat	float32	`json:"lat" binding:"required"`
+	Long	float32	`json:"long" binding:"required"`
+	BlockID	int64	`json:"block_id" binding:"required"`
 }
 
 func (server *Server) updateProperty(ctx *gin.Context) {
@@ -114,11 +114,11 @@ func (server *Server) updateProperty(ctx *gin.Context) {
 	}
 
 	arg := db.UpdatePropertyParams{
-		ID:           req.ID,
-		PropertyName: req.PropertyName,
-		Lat:          req.Lat,
-		Long:         req.Long,
-		BlockID:      req.BlockID,
+		ID:	req.ID,
+		PropertyName:	req.PropertyName,
+		Lat:	req.Lat,
+		Long:	req.Long,
+		BlockID:	req.BlockID,
 	}
 	property, err := server.store.UpdateProperty(ctx, arg)
 	if err != nil {
@@ -129,20 +129,21 @@ func (server *Server) updateProperty(ctx *gin.Context) {
 }
 
 type deletePropertyRequest struct {
-	ID int64 `uri:"id" binding:"required,min=1"`
+	ID	int64	`uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteProperty(ctx *gin.Context) {
-	var req deletePropertyRequest
-	if err := ctx.ShouldBindUri(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return
-	}
+		var req deletePropertyRequest
+		if err := ctx.ShouldBindUri(&req); err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
 
-	err := server.store.DeleteProperty(ctx, req.BlockID)
+		err := server.store.DeleteProperty(ctx, req.)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
+
