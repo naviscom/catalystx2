@@ -24,11 +24,9 @@ func (server *Server) createUser(ctx *gin.Context) {
 	}
 
 	arg := db.CreateUserParams{
-		HashedPassword:    req.HashedPassword,
-		FullName:          req.FullName,
-		Email:             req.Email,
-		PasswordChangedAt: req.PasswordChangedAt,
-		PasswordCreatedAt: req.PasswordCreatedAt,
+		HashedPassword: req.HashedPassword,
+		FullName:       req.FullName,
+		Email:          req.Email,
 	}
 	user, err := server.store.CreateUser(ctx, arg)
 	if err != nil {
@@ -57,18 +55,18 @@ func (server *Server) getUser0(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, user)
 }
 
-type getUserRequest1 struct {
+type getUserRequest3 struct {
 	Email string `uri:"email" binding:"required,min=1"`
 }
 
-func (server *Server) getUser1(ctx *gin.Context) {
-	var req getUserRequest1
+func (server *Server) getUser3(ctx *gin.Context) {
+	var req getUserRequest3
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
 
-	user, err := server.store.GetUser1(ctx, req.Email)
+	user, err := server.store.GetUser3(ctx, req.Email)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
@@ -123,7 +121,6 @@ func (server *Server) updateUser(ctx *gin.Context) {
 		FullName:          req.FullName,
 		Email:             req.Email,
 		PasswordChangedAt: req.PasswordChangedAt,
-		PasswordCreatedAt: req.PasswordCreatedAt,
 	}
 	user, err := server.store.UpdateUser(ctx, arg)
 	if err != nil {
