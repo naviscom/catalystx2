@@ -2,14 +2,14 @@ package api
 
 import (
 	"net/http"
-	"time"
+
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createSitetypeRequest struct {
-	TypeName	string	`json:"type_name" binding:"required"`
-	TypeDesc	string	`json:"type_desc" binding:"required"`
+	TypeName string `json:"type_name" binding:"required"`
+	TypeDesc string `json:"type_desc" binding:"required"`
 }
 
 func (server *Server) createSitetype(ctx *gin.Context) {
@@ -20,8 +20,8 @@ func (server *Server) createSitetype(ctx *gin.Context) {
 	}
 
 	arg := db.CreateSitetypeParams{
-		TypeName:	req.TypeName,
-		TypeDesc:	req.TypeDesc,
+		TypeName: req.TypeName,
+		TypeDesc: req.TypeDesc,
 	}
 	sitetype, err := server.store.CreateSitetype(ctx, arg)
 	if err != nil {
@@ -32,7 +32,7 @@ func (server *Server) createSitetype(ctx *gin.Context) {
 }
 
 type getSitetypeRequest0 struct {
-	ID	int64	`uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getSitetype0(ctx *gin.Context) {
@@ -51,7 +51,7 @@ func (server *Server) getSitetype0(ctx *gin.Context) {
 }
 
 type getSitetypeRequest1 struct {
-	TypeName	string	`uri:"type_name" binding:"required,min=1"`
+	TypeName string `uri:"type_name" binding:"required,min=1"`
 }
 
 func (server *Server) getSitetype1(ctx *gin.Context) {
@@ -71,7 +71,7 @@ func (server *Server) getSitetype1(ctx *gin.Context) {
 
 type listSitetypeRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listSitetypes(ctx *gin.Context) {
@@ -95,9 +95,9 @@ func (server *Server) listSitetypes(ctx *gin.Context) {
 }
 
 type updateSitetypeRequest struct {
-	ID	int64	`json:"id" binding:"required"`
-	TypeName	string	`json:"type_name" binding:"required"`
-	TypeDesc	string	`json:"type_desc" binding:"required"`
+	ID       int64  `json:"id" binding:"required"`
+	TypeName string `json:"type_name" binding:"required"`
+	TypeDesc string `json:"type_desc" binding:"required"`
 }
 
 func (server *Server) updateSitetype(ctx *gin.Context) {
@@ -108,9 +108,9 @@ func (server *Server) updateSitetype(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateSitetypeParams{
-		ID:	req.ID,
-		TypeName:	req.TypeName,
-		TypeDesc:	req.TypeDesc,
+		ID:       req.ID,
+		TypeName: req.TypeName,
+		TypeDesc: req.TypeDesc,
 	}
 	sitetype, err := server.store.UpdateSitetype(ctx, arg)
 	if err != nil {
@@ -121,21 +121,20 @@ func (server *Server) updateSitetype(ctx *gin.Context) {
 }
 
 type deleteSitetypeRequest struct {
-	ID	int64	`uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteSitetype(ctx *gin.Context) {
-		var req deleteSitetypeRequest
-		if err := ctx.ShouldBindUri(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
+	var req deleteSitetypeRequest
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 
-		err := server.store.DeleteSitetype(ctx, req.)
+	err := server.store.DeleteSitetype(ctx, req.ID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
-

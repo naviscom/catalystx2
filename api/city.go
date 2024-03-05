@@ -2,15 +2,15 @@ package api
 
 import (
 	"net/http"
-	"time"
+
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createCityRequest struct {
-	CityName	string	`json:"city_name" binding:"required"`
-	CityDesc	string	`json:"city_desc" binding:"required"`
-	StateID	int64	`json:"state_id" binding:"required"`
+	CityName string `json:"city_name" binding:"required"`
+	CityDesc string `json:"city_desc" binding:"required"`
+	StateID  int64  `json:"state_id" binding:"required"`
 }
 
 func (server *Server) createCity(ctx *gin.Context) {
@@ -21,9 +21,9 @@ func (server *Server) createCity(ctx *gin.Context) {
 	}
 
 	arg := db.CreateCityParams{
-		CityName:	req.CityName,
-		CityDesc:	req.CityDesc,
-		StateID:	req.StateID,
+		CityName: req.CityName,
+		CityDesc: req.CityDesc,
+		StateID:  req.StateID,
 	}
 	city, err := server.store.CreateCity(ctx, arg)
 	if err != nil {
@@ -34,7 +34,7 @@ func (server *Server) createCity(ctx *gin.Context) {
 }
 
 type getCityRequest0 struct {
-	ID	int64	`uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getCity0(ctx *gin.Context) {
@@ -53,7 +53,7 @@ func (server *Server) getCity0(ctx *gin.Context) {
 }
 
 type getCityRequest1 struct {
-	CityName	string	`uri:"city_name" binding:"required,min=1"`
+	CityName string `uri:"city_name" binding:"required,min=1"`
 }
 
 func (server *Server) getCity1(ctx *gin.Context) {
@@ -73,7 +73,7 @@ func (server *Server) getCity1(ctx *gin.Context) {
 
 type listCityRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listCities(ctx *gin.Context) {
@@ -97,10 +97,10 @@ func (server *Server) listCities(ctx *gin.Context) {
 }
 
 type updateCityRequest struct {
-	ID	int64	`json:"id" binding:"required"`
-	CityName	string	`json:"city_name" binding:"required"`
-	CityDesc	string	`json:"city_desc" binding:"required"`
-	StateID	int64	`json:"state_id" binding:"required"`
+	ID       int64  `json:"id" binding:"required"`
+	CityName string `json:"city_name" binding:"required"`
+	CityDesc string `json:"city_desc" binding:"required"`
+	StateID  int64  `json:"state_id" binding:"required"`
 }
 
 func (server *Server) updateCity(ctx *gin.Context) {
@@ -111,10 +111,10 @@ func (server *Server) updateCity(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateCityParams{
-		ID:	req.ID,
-		CityName:	req.CityName,
-		CityDesc:	req.CityDesc,
-		StateID:	req.StateID,
+		ID:       req.ID,
+		CityName: req.CityName,
+		CityDesc: req.CityDesc,
+		StateID:  req.StateID,
 	}
 	city, err := server.store.UpdateCity(ctx, arg)
 	if err != nil {
@@ -125,21 +125,20 @@ func (server *Server) updateCity(ctx *gin.Context) {
 }
 
 type deleteCityRequest struct {
-	ID	int64	`uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteCity(ctx *gin.Context) {
-		var req deleteCityRequest
-		if err := ctx.ShouldBindUri(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
+	var req deleteCityRequest
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 
-		err := server.store.DeleteCity(ctx, req.)
+	err := server.store.DeleteCity(ctx, req.ID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
-

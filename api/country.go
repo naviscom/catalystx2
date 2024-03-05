@@ -2,15 +2,15 @@ package api
 
 import (
 	"net/http"
-	"time"
+
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 )
 
 type createCountryRequest struct {
-	CountryName	string	`json:"country_name" binding:"required"`
-	CountryDesc	string	`json:"country_desc" binding:"required"`
-	ContinentID	int64	`json:"continent_id" binding:"required"`
+	CountryName string `json:"country_name" binding:"required"`
+	CountryDesc string `json:"country_desc" binding:"required"`
+	ContinentID int64  `json:"continent_id" binding:"required"`
 }
 
 func (server *Server) createCountry(ctx *gin.Context) {
@@ -21,9 +21,9 @@ func (server *Server) createCountry(ctx *gin.Context) {
 	}
 
 	arg := db.CreateCountryParams{
-		CountryName:	req.CountryName,
-		CountryDesc:	req.CountryDesc,
-		ContinentID:	req.ContinentID,
+		CountryName: req.CountryName,
+		CountryDesc: req.CountryDesc,
+		ContinentID: req.ContinentID,
 	}
 	country, err := server.store.CreateCountry(ctx, arg)
 	if err != nil {
@@ -34,7 +34,7 @@ func (server *Server) createCountry(ctx *gin.Context) {
 }
 
 type getCountryRequest0 struct {
-	ID	int64	`uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getCountry0(ctx *gin.Context) {
@@ -53,7 +53,7 @@ func (server *Server) getCountry0(ctx *gin.Context) {
 }
 
 type getCountryRequest1 struct {
-	CountryName	string	`uri:"country_name" binding:"required,min=1"`
+	CountryName string `uri:"country_name" binding:"required,min=1"`
 }
 
 func (server *Server) getCountry1(ctx *gin.Context) {
@@ -73,7 +73,7 @@ func (server *Server) getCountry1(ctx *gin.Context) {
 
 type listCountryRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listCountries(ctx *gin.Context) {
@@ -97,10 +97,10 @@ func (server *Server) listCountries(ctx *gin.Context) {
 }
 
 type updateCountryRequest struct {
-	ID	int64	`json:"id" binding:"required"`
-	CountryName	string	`json:"country_name" binding:"required"`
-	CountryDesc	string	`json:"country_desc" binding:"required"`
-	ContinentID	int64	`json:"continent_id" binding:"required"`
+	ID          int64  `json:"id" binding:"required"`
+	CountryName string `json:"country_name" binding:"required"`
+	CountryDesc string `json:"country_desc" binding:"required"`
+	ContinentID int64  `json:"continent_id" binding:"required"`
 }
 
 func (server *Server) updateCountry(ctx *gin.Context) {
@@ -111,10 +111,10 @@ func (server *Server) updateCountry(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateCountryParams{
-		ID:	req.ID,
-		CountryName:	req.CountryName,
-		CountryDesc:	req.CountryDesc,
-		ContinentID:	req.ContinentID,
+		ID:          req.ID,
+		CountryName: req.CountryName,
+		CountryDesc: req.CountryDesc,
+		ContinentID: req.ContinentID,
 	}
 	country, err := server.store.UpdateCountry(ctx, arg)
 	if err != nil {
@@ -125,21 +125,20 @@ func (server *Server) updateCountry(ctx *gin.Context) {
 }
 
 type deleteCountryRequest struct {
-	ID	int64	`uri:"id" binding:"required,min=1"`
+	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) deleteCountry(ctx *gin.Context) {
-		var req deleteCountryRequest
-		if err := ctx.ShouldBindUri(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
+	var req deleteCountryRequest
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
 
-		err := server.store.DeleteCountry(ctx, req.)
+	err := server.store.DeleteCountry(ctx, req.ID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
-
