@@ -9,12 +9,10 @@ import (
 )
 
 type createUserRequest struct {
-	Username          string    `json:"username" binding:"required"`
-	HashedPassword    string    `json:"hashed_password" binding:"required"`
-	FullName          string    `json:"full_name" binding:"required"`
-	Email             string    `json:"email" binding:"required"`
-	PasswordChangedAt time.Time `json:"password_changed_at" binding:"required"`
-	PasswordCreatedAt time.Time `json:"password_created_at" binding:"required"`
+	Username       string `json:"username" binding:"required"`
+	HashedPassword string `json:"hashed_password" binding:"required"`
+	FullName       string `json:"full_name" binding:"required"`
+	Email          string `json:"email" binding:"required"`
 }
 
 func (server *Server) createUser(ctx *gin.Context) {
