@@ -82,6 +82,8 @@ func TestListUsers(t *testing.T) {
 
 func TestUpdateUser(t *testing.T) {
 	user1 := createRandomUser(t)
+	hashedPassword, err := util.HashPassword(util.RandomString(6))
+	require.NoError(t, err)
 	arg := UpdateUserParams{
 		Username:          user1.Username,
 		HashedPassword:    util.RandomName(8),
