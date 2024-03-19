@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"errors"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt"
 )
 
 const minSecretKeySize = 32
@@ -31,8 +31,9 @@ func (maker *JWTMaker) CreateToken(username string, role string, duration time.D
 	}
 
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
-	token, err := jwtToken.SignedString([]byte(maker.secretKey))
-	return token, payload, err
+//	token, err := jwtToken.SignedString([]byte(maker.secretKey))
+//	return token, payload, err
+	return jwtToken.SignedString([]byte(maker.secretKey))
 }
 
 // VerifyToken checks if the token is valid or not
