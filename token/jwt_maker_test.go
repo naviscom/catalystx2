@@ -47,7 +47,7 @@ token, err := maker.CreateToken(util.RandomName(8), -time.Minute)
 	require.NotEmpty(t, token)
 	//require.NotEmpty(t, payload)
 
-	payload, err = maker.VerifyToken(token)
+	payload, err := maker.VerifyToken(token)
 	require.Error(t, err)
 	require.EqualError(t, err, ErrExpiredToken.Error())
 	require.Nil(t, payload)
