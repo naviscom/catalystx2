@@ -96,7 +96,6 @@ func TestUpdateUser(t *testing.T) {
 	require.NotEmpty(t, user2)
 
 	require.Equal(t, user1.Username, user2.Username)
-	
 	require.Equal(t, arg.HashedPassword, user2.HashedPassword)
 	require.Equal(t, arg.FullName, user2.FullName)
 	require.Equal(t, arg.Email, user2.Email)

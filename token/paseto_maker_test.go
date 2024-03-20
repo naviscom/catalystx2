@@ -36,19 +36,19 @@ expiredAt := issuedAt.Add(duration)
 	require.WithinDuration(t, issuedAt, payload.IssuedAt, time.Second)
 	require.WithinDuration(t, expiredAt, payload.ExpiredAt, time.Second)
 }
-//func TestExpiredPasetoToken(t *testing.T) {
-	//maker, err := NewPasetoMaker(util.RandomString(32))
-	//require.NoError(t, err)
+func TestExpiredPasetoToken(t *testing.T) {
+	maker, err := NewPasetoMaker(util.RandomString(32))
+	require.NoError(t, err)
 
 //token, payload, err := maker.CreateToken(util.RandomName(8), util.DepositorRole, -time.Minute)
-//token, payload, err := maker.CreateToken(util.RandomName(8), -time.Minute)
-	//require.NoError(t, err)
-	//require.NotEmpty(t, token)
+token, err := maker.CreateToken(util.RandomName(8), -time.Minute)
+	require.NoError(t, err)
+	require.NotEmpty(t, token)
 	//require.NotEmpty(t, payload)
 
-	//payload, err = maker.VerifyToken(token)
-	//require.Error(t, err)
-	//require.EqualError(t, err, ErrExpiredToken.Error())
-	//require.Nil(t, payload)
-//}
+	payload, err = maker.VerifyToken(token)
+	require.Error(t, err)
+	require.EqualError(t, err, ErrExpiredToken.Error())
+	require.Nil(t, payload)
+}
 
