@@ -9,8 +9,8 @@ import (
 
 )
 
-func TestPestoMaker(t *testing.T) {
-	maker, err := NewPestoMaker(util.RandomString(32))
+func TestPasetoMaker(t *testing.T) {
+	maker, err := NewPasetoMaker(util.RandomString(32))
 	require.NoError(t, err)
 
 	username := util.RandomName(8)
