@@ -86,7 +86,7 @@ func TestUpdateUser(t *testing.T) {
 	require.NoError(t, err)
 	arg := UpdateUserParams{
 		Username:          user1.Username,
-		HashedPassword:    util.RandomName(8),
+		HashedPassword:    hashedPassword,
 		FullName:          util.RandomName(8),
 		Email:             util.RandomName(8),
 		PasswordChangedAt: time.Now().UTC(),
