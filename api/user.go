@@ -8,7 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 	"github.com/naviscom/catalystx2/util"
-	db "github.com/naviscom/catalystx2/util"
 )
 
 type createUserRequest struct {

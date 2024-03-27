@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
-	db "github.com/naviscom/catalystx2/util"
 )
 
 type createTrafficRequest struct {
