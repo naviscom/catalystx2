@@ -15,7 +15,12 @@ type createUserRequest struct {
 }
 
 type userResponse struct {
-	Username	string	`json:"username`	FullName	string	`json:"full_name`	Email	string	`json:"email`	PasswordChangedAt	string	`json:"password_changed_at`	PasswordCreatedAt	string	`json:"password_created_at`	}
+	Username	string	`json:"username`
+	FullName	string	`json:"full_name`
+	Email	string	`json:"email`
+	PasswordChangedAt	string	`json:"password_changed_at`
+	PasswordCreatedAt	string	`json:"password_created_at`
+	}
 
 func newUserResponse(user db.User) userResponse {
 	return userResponse {
