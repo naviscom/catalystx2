@@ -1,26 +1,33 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
+	"github.com/naviscom/catalystx2/token"
 	"github.com/naviscom/catalystx2/util"
 )
 
 // // Server serves HTTP requests.
 type Server struct {
-	config util.Config
-	store  *db.Store
-	//tokenMaker token.Maker
-	router *gin.Engine
+	config     util.Config
+	store      *db.Store
+	tokenMaker token.Maker
+	router     *gin.Engine
 }
 
 // NewServer creates a new HTTP Gin server and set up routing & CORS.
 func NewServer(config util.Config, store *db.Store) (*Server, error) {
+	tokenMaker, err := token.NewPasetoMaker("config.TokenSymmetricKey")
+	if err != nil {
+		return nil, fmt.Errorf("cannot create token maker: %w", err)
+	}
 	server := &Server{
-		config: config,
-		store:  store,
-		//tokenMaker: tokenMaker,
+		config:     config,
+		store:      store,
+		tokenMaker: tokenMaker,
 	}
 	server.setupRouter()
 	return server, nil
@@ -147,6 +154,7 @@ func (server *Server) setupRouter() {
 	router.POST("/updatetraffic", server.updateTraffic)
 	router.GET("/deletetraffic/:id", server.deleteTraffic)
 	router.POST("/users", server.createUser)
+	router.POST("/users/login", server.loginUser)
 	router.GET("/users0/:username", server.getUser0)
 	router.GET("/users3/:email", server.getUser3)
 	router.GET("/users", server.listUsers)
@@ -266,6 +274,7 @@ func (server *Server) setupRouter() {
 	router.POST("/updatetraffic", server.updateTraffic)
 	router.GET("/deletetraffic/:id", server.deleteTraffic)
 	router.POST("/users", server.createUser)
+	router.POST("/users/login", server.loginUser)
 	router.GET("/users0/:username", server.getUser0)
 	router.GET("/users3/:email", server.getUser3)
 	router.GET("/users", server.listUsers)
