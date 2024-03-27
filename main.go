@@ -30,7 +30,7 @@ func main() {
 	// Creating new instance of HTTP server
 	server, _ := api.NewServer(config, store)
 if err != nil {
-	log.fatal("cannot create server:", err)
+	log.Fatal("cannot create server:", err)
 }
 	// Giving a kick start to the newly created HTTP server instance
 	err = server.Start(config.HTTPServerAddress)
