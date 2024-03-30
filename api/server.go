@@ -20,7 +20,7 @@ type Server struct {
 
 // NewServer creates a new HTTP Gin server and set up routing & CORS.
 func NewServer(config util.Config, store *db.Store) (*Server, error) {
-	tokenMaker, err := token.NewPasetoMaker("config.TokenSymmetricKey")
+	tokenMaker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
 	}
