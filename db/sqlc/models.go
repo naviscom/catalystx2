@@ -201,6 +201,7 @@ type User struct {
 	Email             string    `json:"email"`
 	PasswordChangedAt time.Time `json:"password_changed_at"`
 	PasswordCreatedAt time.Time `json:"password_created_at"`
+	Role              string    `json:"role"`
 }
 
 type Vendor struct {
