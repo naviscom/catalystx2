@@ -42,12 +42,12 @@ func TestExpiredJWTToken(t *testing.T) {
 	require.NoError(t, err)
 
 	//token, payload, err := maker.CreateToken(util.RandomName(8), util.DepositorRole, -time.Minute)
-	token, err := maker.CreateToken(util.RandomName(8), util.UserLevel_1_Role, -time.Minute)
+	token, payload, err := maker.CreateToken(util.RandomName(8), util.UserLevel_1_Role, -time.Minute)
 	require.NoError(t, err)
 	require.NotEmpty(t, token)
-	//require.NotEmpty(t, payload)
+	require.NotEmpty(t, payload)
 
-	payload, err := maker.VerifyToken(token)
+	payload, err = maker.VerifyToken(token)
 	require.Error(t, err)
 	require.EqualError(t, err, ErrExpiredToken.Error())
 	require.Nil(t, payload)
