@@ -10,6 +10,7 @@ import (
 )
 
 type createSessionRequest struct {
+	ID           uuid.UUID `json:"id" binding:"required"`
 	Username     string    `json:"username" binding:"required"`
 	RefreshToken string    `json:"refresh_token" binding:"required"`
 	UserAgent    string    `json:"user_agent" binding:"required"`
