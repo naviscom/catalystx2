@@ -115,7 +115,7 @@ func (server *Server) loginUser(ctx *gin.Context) {
 	refreshToken, refreshPayload, err := server.tokenMaker.CreateToken(
 		//	refreshToken, err := server.tokenMaker.CreateToken(
 		user.Username,
-		//		user.Role,
+		user.Role,
 		server.config.RefreshTokenDuration,
 	)
 	if err != nil {
@@ -128,9 +128,9 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		Username:     user.Username,
 		RefreshToken: refreshToken,
 		//		UserAgent:    ctx.Request.UserAgent(),
-		//		UserAgent:    ctx.Request.UserAgent(),
+		//		ClientIp:    ctx.Request.UserAgent(),
 		UserAgent: "",
-		UserAgent: "",
+		ClientIp:  "",
 		IsBlocked: false,
 		ExpiresAt: refreshPayload.ExpiredAt,
 	})
