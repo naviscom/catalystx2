@@ -160,6 +160,11 @@ func (server *Server) setupRouter() {
 	router.GET("/users", server.listUsers)
 	router.POST("/updateusers", server.updateUser)
 	router.GET("/deleteusers/:id", server.deleteUser)
+	authRoutes.POST("/sessions", server.createSession)
+	authRoutes.GET("/sessions0/:id", server.getSession0)
+	authRoutes.GET("/sessions", server.listSessions)
+	authRoutes.POST("/updatesessions", server.updateSession)
+	authRoutes.GET("/deletesessions/:id", server.deleteSession)
 
 	// setting the Gin router to Default() allows all origins
 	router.Use(cors.Default())

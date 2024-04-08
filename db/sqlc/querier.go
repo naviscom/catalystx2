@@ -6,6 +6,8 @@ package db
 
 import (
 	"context"
+
+	"github.com/google/uuid"
 )
 
 type Querier interface {
@@ -21,6 +23,7 @@ type Querier interface {
 	CreateDistrict(ctx context.Context, arg CreateDistrictParams) (District, error)
 	CreateProperty(ctx context.Context, arg CreatePropertyParams) (Property, error)
 	CreateServiceareatype(ctx context.Context, arg CreateServiceareatypeParams) (Serviceareatype, error)
+	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateSite(ctx context.Context, arg CreateSiteParams) (Site, error)
 	CreateSitetype(ctx context.Context, arg CreateSitetypeParams) (Sitetype, error)
 	CreateState(ctx context.Context, arg CreateStateParams) (State, error)
@@ -41,6 +44,7 @@ type Querier interface {
 	DeleteDistrict(ctx context.Context, id int64) error
 	DeleteProperty(ctx context.Context, id int64) error
 	DeleteServiceareatype(ctx context.Context, id int64) error
+	DeleteSession(ctx context.Context, id uuid.UUID) error
 	DeleteSite(ctx context.Context, id int64) error
 	DeleteSitetype(ctx context.Context, id int64) error
 	DeleteState(ctx context.Context, id int64) error
@@ -73,6 +77,7 @@ type Querier interface {
 	GetProperty1(ctx context.Context, propertyName string) (Property, error)
 	GetServiceareatype0(ctx context.Context, id int64) (Serviceareatype, error)
 	GetServiceareatype1(ctx context.Context, serviceareatypeName string) (Serviceareatype, error)
+	GetSession0(ctx context.Context, id uuid.UUID) (Session, error)
 	GetSite0(ctx context.Context, id int64) (Site, error)
 	GetSite1(ctx context.Context, siteName string) (Site, error)
 	GetSitetype0(ctx context.Context, id int64) (Sitetype, error)
@@ -100,6 +105,7 @@ type Querier interface {
 	ListDistricts(ctx context.Context, arg ListDistrictsParams) ([]District, error)
 	ListProperties(ctx context.Context, arg ListPropertiesParams) ([]Property, error)
 	ListServiceareatypes(ctx context.Context, arg ListServiceareatypesParams) ([]Serviceareatype, error)
+	ListSessions(ctx context.Context, arg ListSessionsParams) ([]Session, error)
 	ListSites(ctx context.Context, arg ListSitesParams) ([]Site, error)
 	ListSitetypes(ctx context.Context, arg ListSitetypesParams) ([]Sitetype, error)
 	ListStates(ctx context.Context, arg ListStatesParams) ([]State, error)
@@ -120,6 +126,7 @@ type Querier interface {
 	UpdateDistrict(ctx context.Context, arg UpdateDistrictParams) (District, error)
 	UpdateProperty(ctx context.Context, arg UpdatePropertyParams) (Property, error)
 	UpdateServiceareatype(ctx context.Context, arg UpdateServiceareatypeParams) (Serviceareatype, error)
+	UpdateSession(ctx context.Context, arg UpdateSessionParams) (Session, error)
 	UpdateSite(ctx context.Context, arg UpdateSiteParams) (Site, error)
 	UpdateSitetype(ctx context.Context, arg UpdateSitetypeParams) (Sitetype, error)
 	UpdateState(ctx context.Context, arg UpdateStateParams) (State, error)
