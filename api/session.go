@@ -2,20 +2,20 @@ package api
 
 import (
 	"net/http"
-	"errors"
 	"time"
+
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	db "github.com/naviscom/catalystx2/db/sqlc"
-	"github.com/naviscom/catalystx2/util"
 )
 
 type createSessionRequest struct {
-	Username	string	`json:"username" binding:"required"`
-	RefreshToken	string	`json:"refresh_token" binding:"required"`
-	UserAgent	string	`json:"user_agent" binding:"required"`
-	ClientIp	string	`json:"client_ip" binding:"required"`
-	ExpiresAt	time.Time	`json:"expires_at" binding:"required"`
-	CreatedAt	time.Time	`json:"created_at" binding:"required"`
+	Username     string    `json:"username" binding:"required"`
+	RefreshToken string    `json:"refresh_token" binding:"required"`
+	UserAgent    string    `json:"user_agent" binding:"required"`
+	ClientIp     string    `json:"client_ip" binding:"required"`
+	ExpiresAt    time.Time `json:"expires_at" binding:"required"`
+	CreatedAt    time.Time `json:"created_at" binding:"required"`
 }
 
 func (server *Server) createSession(ctx *gin.Context) {
@@ -26,14 +26,14 @@ func (server *Server) createSession(ctx *gin.Context) {
 	}
 
 	arg := db.CreateSessionParams{
-		ID:	req.ID,
-		Username:	req.Username,
-		RefreshToken:	req.RefreshToken,
-		UserAgent:	req.UserAgent,
-		ClientIp:	req.ClientIp,
-		IsBlocked:	req.IsBlocked,
-		ExpiresAt:	req.ExpiresAt,
-		CreatedAt:	req.CreatedAt,
+		ID:           req.ID,
+		Username:     req.Username,
+		RefreshToken: req.RefreshToken,
+		UserAgent:    req.UserAgent,
+		ClientIp:     req.ClientIp,
+		IsBlocked:    req.IsBlocked,
+		ExpiresAt:    req.ExpiresAt,
+		CreatedAt:    req.CreatedAt,
 	}
 	session, err := server.store.CreateSession(ctx, arg)
 	if err != nil {
@@ -44,7 +44,7 @@ func (server *Server) createSession(ctx *gin.Context) {
 }
 
 type getSessionRequest0 struct {
-	ID	`uri:"id" binding:"required,min=1"`
+	ID `uri:"id" binding:"required,min=1"`
 }
 
 func (server *Server) getSession0(ctx *gin.Context) {
@@ -64,7 +64,7 @@ func (server *Server) getSession0(ctx *gin.Context) {
 
 type listSessionRequest struct {
 	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize   int32 `form:"page_size" binding:"required,min=5,max=10"`
+	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
 func (server *Server) listSessions(ctx *gin.Context) {
@@ -88,14 +88,14 @@ func (server *Server) listSessions(ctx *gin.Context) {
 }
 
 type updateSessionRequest struct {
-	ID	`json:"id" binding:"required"`
-	Username	string	`json:"username" binding:"required"`
-	RefreshToken	string	`json:"refresh_token" binding:"required"`
-	UserAgent	string	`json:"user_agent" binding:"required"`
-	ClientIp	string	`json:"client_ip" binding:"required"`
-	IsBlocked	`json:"is_blocked" binding:"required"`
-	ExpiresAt	time.Time	`json:"expires_at" binding:"required"`
-	CreatedAt	time.Time	`json:"created_at" binding:"required"`
+	ID           `json:"id" binding:"required"`
+	Username     string `json:"username" binding:"required"`
+	RefreshToken string `json:"refresh_token" binding:"required"`
+	UserAgent    string `json:"user_agent" binding:"required"`
+	ClientIp     string `json:"client_ip" binding:"required"`
+	IsBlocked    `json:"is_blocked" binding:"required"`
+	ExpiresAt    time.Time `json:"expires_at" binding:"required"`
+	CreatedAt    time.Time `json:"created_at" binding:"required"`
 }
 
 func (server *Server) updateSession(ctx *gin.Context) {
@@ -106,14 +106,14 @@ func (server *Server) updateSession(ctx *gin.Context) {
 	}
 
 	arg := db.UpdateSessionParams{
-		ID:	req.ID,
-		Username:	req.Username,
-		RefreshToken:	req.RefreshToken,
-		UserAgent:	req.UserAgent,
-		ClientIp:	req.ClientIp,
-		IsBlocked:	req.IsBlocked,
-		ExpiresAt:	req.ExpiresAt,
-		CreatedAt:	req.CreatedAt,
+		ID:           req.ID,
+		Username:     req.Username,
+		RefreshToken: req.RefreshToken,
+		UserAgent:    req.UserAgent,
+		ClientIp:     req.ClientIp,
+		IsBlocked:    req.IsBlocked,
+		ExpiresAt:    req.ExpiresAt,
+		CreatedAt:    req.CreatedAt,
 	}
 	session, err := server.store.UpdateSession(ctx, arg)
 	if err != nil {
@@ -124,18 +124,20 @@ func (server *Server) updateSession(ctx *gin.Context) {
 }
 
 type deleteSessionRequest struct {
-	IDfunc (server *Server) deleteSession(ctx *gin.Context) {
-		var req deleteSessionRequest
-		if err := ctx.ShouldBindUri(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
+	ID uuid.UUID `uri:"id" binding:"required,min=1"`
+}
 
-		err := server.store.DeleteSession(ctx, req.)
+func (server *Server) deleteSession(ctx *gin.Context) {
+	var req deleteSessionRequest
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	err := server.store.DeleteSession(ctx, req.ID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, "record deleted successfully")
 }
-
