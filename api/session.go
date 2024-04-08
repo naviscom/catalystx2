@@ -15,6 +15,7 @@ type createSessionRequest struct {
 	RefreshToken string    `json:"refresh_token" binding:"required"`
 	UserAgent    string    `json:"user_agent" binding:"required"`
 	ClientIp     string    `json:"client_ip" binding:"required"`
+	IsBlocked    bool      `json:"is_blocked" binding:"required"`
 	ExpiresAt    time.Time `json:"expires_at" binding:"required"`
 	CreatedAt    time.Time `json:"created_at" binding:"required"`
 }
