@@ -155,6 +155,7 @@ func (server *Server) setupRouter() {
 	authRoutes.GET("/deletetraffic/:id", server.deleteTraffic)
 	router.POST("/users", server.createUser)
 	router.POST("/users/login", server.loginUser)
+	router.POST("/tokens/renew_access", server.renewAccessToken)
 	router.GET("/users0/:username", server.getUser0)
 	router.GET("/users3/:email", server.getUser3)
 	router.GET("/users", server.listUsers)
