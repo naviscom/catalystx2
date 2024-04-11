@@ -14,7 +14,7 @@ type renewAccessTokenRequest struct {
 	RefreshToken string `json:"refresh_token" binding:"required"`
 }
 
-type renewAccessTokenRequest struct {
+type renewAccessTokenResponse struct {
 	AccessToken          string    `json:"access_token"`
 	AccessTokenExpiresAt time.Time `json:"access_token_expires_at"`
 }
@@ -32,11 +32,10 @@ func (server *Server) renewAccessToken(ctx *gin.Context) {
 		return
 	}
 
-	session, err := server.store.GetSession(ctx, refreshPayload.ID)
+	session, err := server.store.GetSession0(ctx, refreshPayload.ID)
 	if err != nil {
 		if errors.Is(err, db.ErrRecordNotFound) {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
-			return
 			return
 		}
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
