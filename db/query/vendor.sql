@@ -23,7 +23,6 @@ OFFSET $2;
 -- name: UpdateVendor :one
 UPDATE vendors
 SET vendor_name = $2,
-vendor_desc = $3
 WHERE id = $1
 RETURNING *;
 

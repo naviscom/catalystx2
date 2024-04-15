@@ -29,8 +29,7 @@ SET hashed_password = $2,
 full_name = $3,
 email = $4,
 password_changed_at = $5
-
-role = $7
+role = $6
 WHERE username = $1
 RETURNING *;
 

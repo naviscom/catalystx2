@@ -42,7 +42,6 @@ rnc = $8,
 site_on_air_date = $9,
 property_id = $10,
 sitetype_id = $11,
-vendor_id = $12
 WHERE id = $1
 RETURNING *;
 

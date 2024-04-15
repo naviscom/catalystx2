@@ -23,7 +23,6 @@ OFFSET $2;
 -- name: UpdateServiceareatype :one
 UPDATE serviceareatypes
 SET serviceareatype_name = $2,
-serviceareatype_desc = $3
 WHERE id = $1
 RETURNING *;
 

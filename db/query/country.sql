@@ -26,7 +26,6 @@ OFFSET $2;
 UPDATE countries
 SET country_name = $2,
 country_desc = $3,
-continent_id = $4
 WHERE id = $1
 RETURNING *;
 

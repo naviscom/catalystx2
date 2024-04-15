@@ -28,7 +28,6 @@ UPDATE states
 SET state_name = $2,
 state_desc = $3,
 country_id = $4,
-area_id = $5
 WHERE id = $1
 RETURNING *;
 
