@@ -5,7 +5,7 @@ INSERT INTO users (
     full_name,
     email,
     role) VALUES (
- $1,$2,$3,$4,$7
+ $1,$2,$3,$4,$5
 )
 RETURNING *;
 
