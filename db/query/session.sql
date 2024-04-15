@@ -30,6 +30,7 @@ user_agent = $4,
 client_ip = $5,
 is_blocked = $6,
 expires_at = $7,
+created_at = $8
 WHERE id = $1
 RETURNING *;
 

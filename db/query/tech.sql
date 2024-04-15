@@ -23,6 +23,7 @@ OFFSET $2;
 -- name: UpdateTech :one
 UPDATE techs
 SET tech_name = $2,
+tech_desc = $3
 WHERE id = $1
 RETURNING *;
 

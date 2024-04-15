@@ -26,6 +26,7 @@ OFFSET $2;
 UPDATE districts
 SET district_name = $2,
 district_desc = $3,
+city_id = $4
 WHERE id = $1
 RETURNING *;
 

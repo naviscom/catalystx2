@@ -56,6 +56,7 @@ antennamodel = $15,
 ecgi = $16,
 site_id = $17,
 carrier_id = $18,
+serviceareatype_id = $19
 WHERE id = $1
 RETURNING *;
 

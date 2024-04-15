@@ -88,6 +88,7 @@ cedlutilization = $33,
 iubcapacity = $34,
 iubutlization = $35,
 bhrrcusers = $36,
+cell_id = $37
 WHERE id = $1
 RETURNING *;
 

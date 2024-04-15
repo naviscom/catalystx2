@@ -23,6 +23,7 @@ OFFSET $2;
 -- name: UpdateContinent :one
 UPDATE continents
 SET continent_name = $2,
+continent_desc = $3
 WHERE id = $1
 RETURNING *;
 
