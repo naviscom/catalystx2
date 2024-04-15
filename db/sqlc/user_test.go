@@ -17,6 +17,7 @@ func createRandomUser(t *testing.T) User {
 		HashedPassword: hashedPassword,
 		FullName:       util.RandomName(8),
 		Email:          util.RandomEmail(),
+		Role:           util.RandomName(8),
 	}
 	user, err := testStore.CreateUser(context.Background(), arg)
 	require.NoError(t, err)
@@ -27,6 +28,7 @@ func createRandomUser(t *testing.T) User {
 	require.Equal(t, arg.Email, user.Email)
 	require.True(t, user.PasswordChangedAt.IsZero())
 	require.NotZero(t, user.PasswordCreatedAt)
+	require.Equal(t, arg.Role, user.Role)
 	return user
 }
 
@@ -46,6 +48,7 @@ func TestGetUser0(t *testing.T) {
 	require.Equal(t, user1.Email, user2.Email)
 	require.WithinDuration(t, user1.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
 	require.WithinDuration(t, user1.PasswordCreatedAt, user2.PasswordCreatedAt, time.Second)
+	require.Equal(t, user1.Role, user2.Role)
 }
 
 func TestGetUser3(t *testing.T) {
@@ -60,6 +63,7 @@ func TestGetUser3(t *testing.T) {
 	require.Equal(t, user1.Email, user2.Email)
 	require.WithinDuration(t, user1.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
 	require.WithinDuration(t, user1.PasswordCreatedAt, user2.PasswordCreatedAt, time.Second)
+	require.Equal(t, user1.Role, user2.Role)
 }
 
 func TestListUsers(t *testing.T) {
@@ -90,6 +94,7 @@ func TestUpdateUser(t *testing.T) {
 		FullName:          util.RandomName(8),
 		Email:             util.RandomName(8),
 		PasswordChangedAt: time.Now().UTC(),
+		Role:              util.RandomName(8),
 	}
 	user2, err := testStore.UpdateUser(context.Background(), arg)
 	require.NoError(t, err)
@@ -100,6 +105,7 @@ func TestUpdateUser(t *testing.T) {
 	require.Equal(t, arg.FullName, user2.FullName)
 	require.Equal(t, arg.Email, user2.Email)
 	require.WithinDuration(t, arg.PasswordChangedAt, user2.PasswordChangedAt, time.Second)
+	require.Equal(t, arg.Role, user2.Role)
 
 }
 

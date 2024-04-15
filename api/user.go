@@ -24,6 +24,7 @@ type userResponse struct {
 	Email             string    `json:"email"`
 	PasswordChangedAt time.Time `json:"password_changed_at"`
 	PasswordCreatedAt time.Time `json:"password_created_at"`
+	Role              string    `json:"role"`
 }
 
 func newUserResponse(user db.User) userResponse {
@@ -33,6 +34,7 @@ func newUserResponse(user db.User) userResponse {
 		Email:             user.Email,
 		PasswordChangedAt: user.PasswordChangedAt,
 		PasswordCreatedAt: user.PasswordCreatedAt,
+		Role:              user.Role,
 	}
 }
 func (server *Server) createUser(ctx *gin.Context) {
@@ -53,6 +55,7 @@ func (server *Server) createUser(ctx *gin.Context) {
 		HashedPassword: hashedPassword,
 		FullName:       req.FullName,
 		Email:          req.Email,
+		Role:           req.Role,
 	}
 
 	user, err := server.store.CreateUser(ctx, arg)
@@ -220,6 +223,7 @@ type updateUserRequest struct {
 	Email             string    `json:"email" binding:"required"`
 	PasswordChangedAt time.Time `json:"password_changed_at" binding:"required"`
 	PasswordCreatedAt time.Time `json:"password_created_at" binding:"required"`
+	Role              string    `json:"role" binding:"required"`
 }
 
 func (server *Server) updateUser(ctx *gin.Context) {
@@ -235,6 +239,7 @@ func (server *Server) updateUser(ctx *gin.Context) {
 		FullName:          req.FullName,
 		Email:             req.Email,
 		PasswordChangedAt: req.PasswordChangedAt,
+		Role:              req.Role,
 	}
 	user, err := server.store.UpdateUser(ctx, arg)
 	if err != nil {

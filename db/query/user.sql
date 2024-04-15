@@ -3,8 +3,9 @@ INSERT INTO users (
     username,
     hashed_password,
     full_name,
-    email) VALUES (
- $1,$2,$3,$4
+    email,
+    role) VALUES (
+ $1,$2,$3,$4,$7
 )
 RETURNING *;
 
@@ -29,6 +30,7 @@ full_name = $3,
 email = $4,
 password_changed_at = $5
 
+role = $7
 WHERE username = $1
 RETURNING *;
 
