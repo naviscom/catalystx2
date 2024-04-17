@@ -147,7 +147,6 @@ SET hashed_password = $2,
 full_name = $3,
 email = $4,
 password_changed_at = $5,
-password_changed_at = $5,
 role = $6
 WHERE username = $1
 RETURNING username, hashed_password, full_name, email, password_changed_at, password_created_at, role
