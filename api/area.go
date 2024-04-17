@@ -1,10 +1,17 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
+
+	/////////////////////////////////////////
+	"errors"
+
+	"github.com/naviscom/catalystx2/token"
+	/////////////////////////////////////////
 )
 
 type createAreaRequest struct {
@@ -13,6 +20,14 @@ type createAreaRequest struct {
 }
 
 func (server *Server) createArea(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req createAreaRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -101,6 +116,14 @@ type updateAreaRequest struct {
 }
 
 func (server *Server) updateArea(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req updateAreaRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -125,6 +148,14 @@ type deleteAreaRequest struct {
 }
 
 func (server *Server) deleteArea(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req deleteAreaRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))

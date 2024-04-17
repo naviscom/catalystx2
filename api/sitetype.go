@@ -1,10 +1,17 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
+
+	/////////////////////////////////////////
+	"errors"
+
+	"github.com/naviscom/catalystx2/token"
+	/////////////////////////////////////////
 )
 
 type createSitetypeRequest struct {
@@ -13,6 +20,14 @@ type createSitetypeRequest struct {
 }
 
 func (server *Server) createSitetype(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req createSitetypeRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -101,6 +116,14 @@ type updateSitetypeRequest struct {
 }
 
 func (server *Server) updateSitetype(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req updateSitetypeRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -125,6 +148,14 @@ type deleteSitetypeRequest struct {
 }
 
 func (server *Server) deleteSitetype(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req deleteSitetypeRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))

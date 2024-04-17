@@ -9,6 +9,12 @@ import (
 	"github.com/google/uuid"
 	db "github.com/naviscom/catalystx2/db/sqlc"
 	"github.com/naviscom/catalystx2/util"
+
+	/////////////////////////////////////////
+	"errors"
+
+	"github.com/naviscom/catalystx2/token"
+	/////////////////////////////////////////
 )
 
 type createUserRequest struct {
@@ -228,6 +234,14 @@ type updateUserRequest struct {
 }
 
 func (server *Server) updateUser(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req updateUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -255,6 +269,14 @@ type deleteUserRequest struct {
 }
 
 func (server *Server) deleteUser(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req deleteUserRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))

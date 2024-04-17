@@ -1,10 +1,17 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	db "github.com/naviscom/catalystx2/db/sqlc"
+
+	/////////////////////////////////////////
+	"errors"
+
+	"github.com/naviscom/catalystx2/token"
+	/////////////////////////////////////////
 )
 
 type createBandRequest struct {
@@ -17,6 +24,14 @@ type createBandRequest struct {
 }
 
 func (server *Server) createBand(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req createBandRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -113,6 +128,14 @@ type updateBandRequest struct {
 }
 
 func (server *Server) updateBand(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req updateBandRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -141,6 +164,14 @@ type deleteBandRequest struct {
 }
 
 func (server *Server) deleteBand(ctx *gin.Context) {
+	////////////////////////////////////////////////////////////////////////
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Role == "level_1_user" {
+		err := errors.New("user is not authorized to perform this activity")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+	////////////////////////////////////////////////////////////////////////
 	var req deleteBandRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
