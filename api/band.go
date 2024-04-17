@@ -8,8 +8,6 @@ import (
 	db "github.com/naviscom/catalystx2/db/sqlc"
 
 	/////////////////////////////////////////
-	"errors"
-
 	"github.com/naviscom/catalystx2/token"
 	/////////////////////////////////////////
 )

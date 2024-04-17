@@ -11,8 +11,6 @@ import (
 	"github.com/naviscom/catalystx2/util"
 
 	/////////////////////////////////////////
-	"errors"
-
 	"github.com/naviscom/catalystx2/token"
 	/////////////////////////////////////////
 )
